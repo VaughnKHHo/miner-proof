@@ -12,6 +12,7 @@ from psl_proof.models.submission_dtos import SubmissionChat
 # Enum for DataSource
 class DataSource(Enum):
     telegram = 0
+    telegramMiner = 1
 
 # Source Chat Data
 @dataclass
@@ -102,7 +103,7 @@ class SourceData:
     user: str
     submission_token: str
     submission_date: datetime
-    proof_token: str 
+    proof_token: str
     source_chats: List[SourceChatData]  # List of SourceChatData instances
 
     def __init__(self, source, submission_token, submission_date, user, source_chats=None, proof_token=None, ):

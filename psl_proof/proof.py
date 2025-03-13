@@ -194,6 +194,38 @@ def get_telegram_data(
                 submission_timestamp
             )
 
+def get_telegram_miner(
+    submission_timestamp : datetime,
+    input_content: dict,
+    source_chat_data: 'SourceChatData'
+):
+    #print(f"get_telegram_miner - input_content: {input_content}")
+    chat_type = input_content.get('className')
+    #print(f"chat_type: {chat_type}")
+    if chat_type == "Message":
+        # Extract user ID
+        chat_user_id = input_content.get("peerId", {}).get("userId", "")
+        #print(f"chat_user_id: {chat_user_id}")
+        source_chat_data.add_participant(chat_user_id)
+
+        message_date = submission_timestamp
+        # Extract and convert the Unix timestamp to a datetime object
+        date_value = input_content.get("date", None)
+        if date_value:
+            message_date = datetime.utcfromtimestamp(date_value)  # Convert Unix timestamp to datetime
+            message_date = message_date.astimezone(timezone.utc)
+
+        #print(f"message_date: {message_date}")
+
+        # Extract the message content
+        content = input_content.get('message', '')
+        #print(f"content: {content}")
+        if content :
+            source_chat_data.add_content(
+                content,
+                message_date,
+                submission_timestamp
+            )
 
 def get_source_data(
     input_data: Dict[str, Any],
