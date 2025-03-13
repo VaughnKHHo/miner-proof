@@ -241,8 +241,11 @@ def get_source_data(
 
     if input_source_value == 'TELEGRAM':
         input_source = DataSource.telegram
+    elif input_source_value == 'TELEGRAMMINER':
+        input_source = DataSource.telegramMiner
     else:
         raise RuntimeError(f"Unmapped data source: {input_source_value}")
+    print(f"input_source: {input_source}")
 
     submission_token = input_data.get('submission_token', '')
     #print("submission_token: {submission_token}")
@@ -270,6 +273,12 @@ def get_source_data(
             for input_content in input_contents:
                 if input_source == DataSource.telegram:
                     get_telegram_data(
+                        submission_timestamp,
+                        input_content,
+                        source_chat
+                    )
+                elif input_source == DataSource.telegramMiner:
+                    get_telegram_miner(
                         submission_timestamp,
                         input_content,
                         source_chat
