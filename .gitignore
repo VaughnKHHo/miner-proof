@@ -1,0 +1,16 @@
+*.pem
+*.tar.gz
+__pycache__/
+*.pyc
+.python-version
+
+env
+
+demo/*
+!demo/input/
+
+.idea/
+
+input/
+output/
+
