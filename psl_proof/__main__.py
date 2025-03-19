@@ -18,7 +18,7 @@ def load_config() -> Dict[str, Any]:
         'dlp_id': 4,
         'input_dir': INPUT_DIR,
         'salt': '5EkntCWI',
-        'validator_base_api_url': 'https://1716-41-193-168-145.ngrok-free.app'
+        'validator_base_api_url': 'https://78e4-196-41-10-145.ngrok-free.app'
     }
     logging.info(f"Using config: {json.dumps(config, indent=2)}")
     return config
