@@ -7,11 +7,11 @@ from typing import Union
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
-from psl_proof.models.submission_dtos import SubmissionChat
+from psl_proof.models.submission_dtos import ChatHistory, SubmissionChat
 
 # Enum for DataSource
 class DataSource(Enum):
-    telegram = 0
+    telegram = 0,
     telegramMiner = 1
 
 # Source Chat Data
@@ -171,6 +171,7 @@ class CargoData:
     source_id: str
     current_timestamp: datetime = None
     last_submission: datetime = None
+    chat_histories: List[ChatHistory] = field(default_factory=list)
     chat_list: List[SubmissionChat] = field(default_factory=list)
     # chat_list: List[ChatData] = field(default_factory=list)
     total_quality = 0.0
@@ -187,8 +188,8 @@ class CargoData:
         # Return a dictionary representation of the CargoData object
         return {
             "source_data": self.source_data,  # Assuming source_data can be serialized directly
-            "source_id": self.source_id #,
-            #"chat_list": [chat.to_dict() for chat in self.chat_list]  # Convert each ChatData in the list to a dict
+            "source_id": self.source_id,
+            "chat_list": get_chat_list_data()
         }
 
     @staticmethod
