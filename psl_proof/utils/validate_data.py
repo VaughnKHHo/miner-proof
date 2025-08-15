@@ -7,7 +7,7 @@ from psl_proof.models.proof_response import ProofResponse
 from typing import List, Dict, Any
 
 from psl_proof.models.submission_dtos import ChatHistory, SubmissionChat, ChatHistory, SubmissionHistory
-#from psl_proof.utils.feature_extraction import get_keywords_keybert, get_sentiment_data
+from psl_proof.utils.feature_extraction import get_keywords_keybert, get_sentiment_data
 
 def get_total_score(quality, uniqueness)-> float:
     #total_score = quality # Since uniqueness always 1
@@ -141,21 +141,24 @@ def validate_data(
             #print(f"source_contents: {source_contents}")
 
             # disable on 27/03/2025
-            # chat_sentiment = get_sentiment_data(
-            #     source_contents
-            # )
-            # chat_keywords = get_keywords_keybert(
-            #     source_contents
-            # )
+            chat_sentiment = get_sentiment_data(
+                source_contents
+            )
+            chat_keywords = get_keywords_keybert(
+                source_contents
+            )
 
-            # chat_data = ChatData(
-            #     chat_length=contents_length,
-            #     chat_start_on = source_chat.chat_start_on,
-            #     chat_ended_on = source_chat.chat_ended_on,
-            #     sentiment = chat_sentiment,
-            #     keywords = chat_keywords
-            # )
-            # #print(f"chat_data: {chat_data}")
-            # cargo_data.chat_list.append(
-            #     chat_data
-            # )
+            print(f"chat_sentiment: {chat_sentiment}")
+            print(f"chat_keywords: {chat_keywords}")
+
+            chat_data = ChatData(
+                chat_length=contents_length,
+                chat_start_on = source_chat.chat_start_on,
+                chat_ended_on = source_chat.chat_ended_on,
+                # sentiment = chat_sentiment,
+                # keywords = chat_keywords
+            )
+            #print(f"chat_data: {chat_data}")
+            cargo_data.chat_list.append(
+                chat_data
+            )
