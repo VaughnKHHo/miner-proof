@@ -50,7 +50,7 @@ class Proof:
             source_data
         )
         is_data_authentic = verify_result
-        cooldown_period_hours = 4  # Safe default
+        cooldown_period_hours = 0  # Safe default
         minimum_score = 0.0001  # Safe default. 0.01 / 100
         if is_data_authentic:
             #print(f"verify_result: {verify_result}")
